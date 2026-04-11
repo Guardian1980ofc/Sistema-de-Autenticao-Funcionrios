@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Painel Restrito</title>
+</head>
+
+<body>
+    <h1>Painel do Funcionário 🔒</h1>
+    <p>Bem-vindo, <strong>{{ user.username }}</strong>!</p>
+    <p>Esta é uma área segura do sistema.</p>
+
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Sair do Sistema</button>
+    </form>
+</body>
+
+</html>
