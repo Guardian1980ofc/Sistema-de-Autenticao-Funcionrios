@@ -1,19 +1,25 @@
-<!DOCTYPE html>
-<html>
+{% extends 'funcionarios/base.html' %}
 
-<head>
-    <title>Painel Restrito</title>
-</head>
+{% block title %}Painel de Controle{% endblock %}
 
-<body>
-    <h1>Painel do Funcionário 🔒</h1>
-    <p>Bem-vindo, <strong>{{ user.username }}</strong>!</p>
-    <p>Esta é uma área segura do sistema.</p>
+{% block content %}
+<div class="container">
+    <h2>Bem-vindo ao Painel de Controle</h2>
+    <p>Olá, <strong>{{ user.username }}</strong>! Este é o seu espaço de gerenciamento.</p>
 
-    <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Sair do Sistema</button>
-    </form>
-</body>
+    <section class="acoes">
+        <h3>Ações Rápidas</h3>
+        <ul>
+            <li><a href="#">Cadastrar Novo Funcionário</a></li>
+            <li><a href="#">Visualizar Relatórios</a></li>
+            <li><a href="#">Configurações da Conta</a></li>
+        </ul>
+    </section>
 
-</html>
+    <hr>
+
+    <section class="status">
+        <p>Status do sistema: <span style="color: green;">Online</span></p>
+    </section>
+</div>
+{% endblock %}

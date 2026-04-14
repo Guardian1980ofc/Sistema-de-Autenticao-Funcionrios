@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema RH{% endblock %}</title>
+</head>
+
+<body>
+    <header>
+        <h1>Sistema de Gerenciamento</h1>
+        <nav>
+            <a href="#">Home</a> |
+            <a href="#">Funcionários</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <hr>
+    <footer>
+        <p>&copy; 2026 - Projeto Web I</p>
+    </footer>
+</body>
+
+</html>
