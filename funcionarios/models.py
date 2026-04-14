@@ -10,7 +10,7 @@ class Base(models.Model):
     class Meta:
         abstract = True #para fazer o Djago não criar uma tabela dele
 
-class employee(Base):
+class Employee(Base):
     name = models.CharField("Name", max_length=100)
 
     def __str__(self):
@@ -27,8 +27,13 @@ class Order(Base):
     client_name = models.CharField(max_length=100)
     products = models.ManyToManyField(Product, related_name='orders')
     
+    # Consulta Avançada: Calcula o total somando os preços dos produtos
+    def total_value(self):
+        return sum(product.price for product in self.products.all())
+
     def __str__(self):
-        return f"Order {self.id} - {self.client_name}"
+        # Exibe o total formatado no Admin
+        return f"Order {self.id} - {self.client_name} (Total: R$ {self.total_value()})"
 
 class Profile(Base):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

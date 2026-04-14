@@ -7,19 +7,57 @@
     <h2>Bem-vindo ao Painel de Controle</h2>
     <p>Olá, <strong>{{ user.username }}</strong>! Este é o seu espaço de gerenciamento.</p>
 
-    <section class="acoes">
-        <h3>Ações Rápidas</h3>
+    <hr>
+
+    <section class="dados-mysql">
+        <h3>👥 Funcionários Ativos (MySQL)</h3>
+        <table border="1" style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th>Nome</th>
+                    <th>Data de Cadastro</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for f in funcionarios %}
+                <tr>
+                    <td>{{ f.name }}</td>
+                    <td>{{ f.created_at|date:"d/m/Y H:i" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2">Nenhum funcionário ativo encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>📦 Pedidos e Consultas Avançadas</h3>
         <ul>
-            <li><a href="#">Cadastrar Novo Funcionário</a></li>
-            <li><a href="#">Visualizar Relatórios</a></li>
-            <li><a href="#">Configurações da Conta</a></li>
+            {% for p in pedidos %}
+            <li>
+                <strong>Cliente: {{ p.client_name }}</strong> —
+                <span style="color: #2c3e50;">Total: R$ {{ p.total_value }}</span>
+                <br><small>Status Soft Delete: {{ p.is_deleted|yesno:"Excluído,Ativo" }}</small>
+            </li>
+            {% empty %}
+            <li>Nenhum pedido registrado no sistema.</li>
+            {% endfor %}
         </ul>
     </section>
 
     <hr>
 
+    <section class="acoes">
+        <h3>Ações Rápidas</h3>
+        <ul>
+            <li><a href="/admin/funcionarios/employee/add/">Cadastrar Novo Funcionário</a></li>
+            <li><a href="/admin">Ir para o Django Admin Completo</a></li>
+        </ul>
+    </section>
+
     <section class="status">
-        <p>Status do sistema: <span style="color: green;">Online</span></p>
+        <p>Status do sistema: <span style="color: green;">Online (Banco MySQL 8.0)</span></p>
     </section>
 </div>
 {% endblock %}

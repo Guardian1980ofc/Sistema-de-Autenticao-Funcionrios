@@ -1,22 +1,19 @@
 from pathlib import Path
-import environ
 import os
+import environ
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Inicializa o environ
 env = environ.Env(
     DEBUG=(bool, False)
 )
 
-# Lê o arquivo .env
+# Ler o arquivo .env
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-SECRET_KEY = env('SECRET_KEY')
-DEBUG = env('DEBUG')
-
+SECRET_KEY = 'django-insecure-chave-aleatoria-qualquer'
+DEBUG = True
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -67,8 +64,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
 }
 
@@ -111,9 +112,10 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'painel'
 LOGOUT_REDIRECT_URL = 'home'
 
-# Arquivos Estáticos (CSS, JavaScript, Imagens do sistema)
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env.bool('DEBUG', default=False)
 
 # Arquivos de Mídia (Uploads feitos pelos usuários/admin)
 MEDIA_URL = 'media/'
