@@ -107,8 +107,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
-
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'painel'
 LOGOUT_REDIRECT_URL = 'home'
+
+# Arquivos Estáticos (CSS, JavaScript, Imagens do sistema)
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# Arquivos de Mídia (Uploads feitos pelos usuários/admin)
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
