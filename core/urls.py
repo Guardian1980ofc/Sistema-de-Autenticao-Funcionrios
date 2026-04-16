@@ -8,7 +8,6 @@ urlpatterns = [
     path('', include('funcionarios.urls')),
 ]
 
-# Essa linha aqui é a mágica que faz as imagens aparecerem no navegador
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

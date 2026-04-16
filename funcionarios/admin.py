@@ -4,6 +4,7 @@ from .models import Employee, Product, Order, Profile
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'client_name', 'total_display', 'created_at', 'is_deleted')
+    list_display_links = ('id', 'client_name')
     list_filter = ('is_deleted', 'created_at') # Filtro avançado lateral
 
     def total_display(self, obj):
